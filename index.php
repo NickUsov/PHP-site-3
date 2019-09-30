@@ -37,6 +37,9 @@
                         include_once 'pages/reports.php';
                     }
                 }
+                else{
+                    include_once 'pages/catalog.php';
+                }
                 ?>
             </section>
         </div>
