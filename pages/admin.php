@@ -25,8 +25,9 @@
             </label>
         </div>
         <div class="form-group">
-            <label for="info">Description:</label>
-            <textarea name="info" cols="10" rows="5" class="form-control"></textarea>
+            <label for="info">Description:
+                <textarea name="info" cols="40" rows="5" class="form-control"></textarea>
+            </label>
         </div>
         <div class="form-group">
             <label for="image_path">Select Image:</label>
@@ -48,7 +49,7 @@
         $item = new Item($item_name, $category_id, $price_in, $price_sale, $info, $path);
         $err = $item->intoDb();
             if($err){
-                    echo  "<script>alert($err)</script>";
+                echo  "<script>alert($err)</script>";
             }
     ?>
 <? endif;?>
