@@ -44,6 +44,29 @@
             }
             return true;
         }
+
+        public static function signIn($login, $password)
+        {
+            if($login === '' || $password === ''){
+                echo  "<script>alert('Fill All Required Fields')</script>";
+                return false;
+            }
+            $login = trim(htmlspecialchars($login));
+            $password = md5(trim(htmlspecialchars($password)));
+            try {
+                $pdo = Tools::connect();
+                $ps = $pdo->prepare("select * from customers where customers.login = ? and customers.password = ?");            
+                $ps->execute([$login, $password]);
+                if($row = $ps->fetch()){
+                    return $row;
+                }
+                else return false;
+                
+            } catch (PDOException $ex) {
+                echo $ex->getMessage();
+                return false;
+            }
+        }
     }
 
     class Customer
@@ -59,8 +82,8 @@
             $this->login = $login;
             $this->password = $password;
             $this->image_path = $image_path;
-            $this->id = 0;
-            $this->role_id = $role_id;
+            $this->id = $id;
+            $this->role_id = 2;
         }
         public function intoDb()
         {

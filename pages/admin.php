@@ -1,5 +1,6 @@
 <h2>Admin</h2>
-<?php if(!isset($_POST['add_btn'])):?>
+<div class="col-md-4">
+    <?php if(!isset($_POST['add_btn'])):?>
     <form action="index.php?page=4" method="post" enctype="multipart/form-data">
     <div class="form-group">
             <label for="category">Select Category:</label>
@@ -25,13 +26,13 @@
         </div>
         <div class="form-group">
             <label for="info">Description:</label>
-            <textarea name="info" cols="10" rows="5"></textarea>
+            <textarea name="info" cols="10" rows="5" class="form-control"></textarea>
         </div>
         <div class="form-group">
             <label for="image_path">Select Image:</label>
             <input type="file" name="image_path" class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary" name="add_btn">Registration</button>
+        <button type="submit" class="btn btn-warning" name="add_btn">Add</button>
     </form>
 <? else:?>
     <?php if(is_uploaded_file($_FILES['image_path']['tmp_name'])){
@@ -47,9 +48,8 @@
         $item = new Item($item_name, $category_id, $price_in, $price_sale, $info, $path);
         $err = $item->intoDb();
             if($err){
-
                     echo  "<script>alert($err)</script>";
-                
             }
     ?>
 <? endif;?>
+</div>

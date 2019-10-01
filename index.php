@@ -1,7 +1,8 @@
 <?php
-    // session_start();
+    session_start();
     include_once 'pages/classes.php';
     // $_SESSION['date'] = date('Y-m-d');
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,10 +29,26 @@
                         include_once 'pages/cart.php';
                     }
                     else if($page == 3){
-                        include_once 'pages/registration.php';
+                        if(isset($_SESSION['user'])){
+                            $user = $_SESSION['user'];
+                            echo "Welcome, user $user";
+                        }
+                        elseif(isset($_SESSION['admin'])){
+                            $admin = $_SESSION['admin'];
+                            echo "Welcome, admin $admin";
+                        }
+                        else{
+                            include_once 'pages/registration.php';
+                        }
+                        
                     }
                     else if($page == 4){
-                        include_once 'pages/admin.php';
+                        if(isset($_SESSION['admin'])){
+                             include_once 'pages/admin.php';
+                        }
+                        else{
+                             echo 'Please, sign in as Admin';
+                        }
                     }
                     else if($page == 5){
                         include_once 'pages/reports.php';

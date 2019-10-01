@@ -1,3 +1,29 @@
+<?php
+    include_once 'classes.php';
+    if(isset($_POST['log_in'])) {
+        if($row = Tools::signIn($_POST['log_check'], $_POST['pas_check'])){
+            if($row['role_id'] == 1){
+              $_SESSION['admin'] = $row['login'];
+              $_SESSION['user_id'] = $row['id'];
+            }
+            else if($row['role_id'] == 2){
+              $_SESSION['user'] = $row['login'];
+              $_SESSION['user_id'] = $row['id'];
+            }
+        }
+        else echo 'Uncorrect login or password';  
+    }
+    if(isset($_POST['log_out'])) {
+        if(isset($_SESSION['admin'])){
+            unset($_SESSION['admin']);
+            unset($_SESSION['user_id']); 
+        }
+        else if(isset($_SESSION['user'])){
+            unset($_SESSION['user']);
+            unset($_SESSION['user_id']);
+        }   
+    }
+?>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="container">
@@ -30,16 +56,26 @@
               <a href="index.php?page=5">Reports</a>
             </li>
             <li>
-              <form class="navbar-form navbar-left">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Login">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Password">
-                </div>
-                <button type="submit" class="btn btn-warning">Submit</button>
+              <?php if(isset($_SESSION['user_id'])):?>
+                <div style="display:flex;margin-top:8px;margin-left:230px">
+                  <?php $user = $_SESSION['user']?$_SESSION['user']:$_SESSION['admin'];?>
+                  <span style="color:white;margin-right:50px;margin-top:8px">Welcome, <?=$user?></span>
+                  <form action="" method="post" >
+                    <input type="submit" class="btn btn-warning" value="Unsign" name="log_out">
+                  </form>
+                </div> 
+              <? else:?>
+              <form class="navbar-form navbar-left" method="post">
+                  <div class="form-group">
+                      <input type="text" class="form-control" name="log_check" placeholder="Login">
+                  </div>
+                  <div class="form-group">
+                      <input type="password" class="form-control" name="pas_check" placeholder="Password">
+                  </div>
+                  <button type="submit" class="btn btn-warning" name="log_in">Sign in</button>
               </form>
-            </li>
+              <? endif;?>
+          </li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div>
