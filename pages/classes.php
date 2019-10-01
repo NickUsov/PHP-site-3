@@ -59,9 +59,8 @@
                 $ps->execute([$login, $password]);
                 if($row = $ps->fetch()){
                     return $row;
-                }
+            }
                 else return false;
-                
             } catch (PDOException $ex) {
                 echo $ex->getMessage();
                 return false;

@@ -62,8 +62,9 @@
         </div>
         <div class="footer">NickUsov, company Step &copy; 2019</div>
     </div>
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/script.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script> 
+    <script  type="text/javascript" src="js/script.js"></script>
+    
 </body>
 </html>
