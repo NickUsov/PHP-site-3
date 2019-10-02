@@ -34,7 +34,7 @@
                             <div class="panel-footer clearfix">
                                 <div class="pull-left"><?=$row['price_sale']?></div>
                                 <div class="pull-right">
-                                    <button data-cart="<?="cart_".$row['id']?>" class="btn btn-primary">To Cart</button>
+                                    <button data-cart="<?="cart_".$row['id']?>" class="btn btn-primary btn_to_cart">To Cart</button>
                                 </div>
                             </div>
                         </div>
