@@ -1,6 +1,7 @@
 <h2>Cart</h2>
 <?php
     $total = 0;
+    $user_id = $_SESSION['user_id'];
 ?>
 <table class="table table-striped">
     <thead>
@@ -37,5 +38,10 @@
         </tr>
     </tfoot>
 </table>
-<button class="btn btn-success" id="btn_buy">Buy</button>
+<? if(isset($_SESSION['user_id'])):?>
+<button data-user_id = "<?=$user_id?>" class="btn btn-success" id="btn_buy">Buy</button>
+<?else:?>
+<button data-user_id = "0" class="btn btn-success" id="btn_buy">Buy</button>
+<?endif;?>
+
   

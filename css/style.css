@@ -1,0 +1,16 @@
+.modal{
+    width: 50%;
+    height: 300px;
+    border: 1px solid black;
+    position: absolute;
+    top: 200px;
+    left: 25%;
+    background-color: white;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+    z-index: 100;
+}

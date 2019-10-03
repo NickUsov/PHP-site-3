@@ -174,6 +174,9 @@
             elseif($name == 'Id'){
                 return $this->id;
             }
+            elseif($name == 'Info'){
+                return $this->info;
+            }
         }
     }
 ?>

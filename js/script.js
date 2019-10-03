@@ -1,6 +1,6 @@
 $('document').ready(function(){
     $('#sel_category').on('change',function(){
-        let category_id = $(this).val();
+        let category_id = $(event.target).val();
         $.ajax({
             type:'POST',
             url: 'pages/list_ajax.php',
@@ -11,7 +11,7 @@ $('document').ready(function(){
                 categories.forEach(function(item){
                    html += `<div class="col-md-3">
                     <div class="panel panel-success">
-                        <div class="panel-heading">${item.item_name}</div>
+                        <div class="panel-heading"><span style="cursor:pointer" class="item_head">${item.item_name}</span></div>
                         <div class="panel-body" style="height:200px">
                             <img src="${item.image_path}" alt="picture" style="max-width:100%;max-height:100%">
                         </div>
@@ -63,16 +63,47 @@ $('document').ready(function(){
     });
 
     $('#btn_buy').on('click', ()=>{
+        let id = $(event.target).data('user_id');
         let cookies_array = document.cookie.split(';');
-        //console.log(cookies_array);
-        data_array = [];
+        let data_array = [];
         cookies_array.forEach((cookies_item)=>{
             if(cookies_item.indexOf('cart') === 1){
                 let cook = cookies_item.split('=');
-                let item = cook[0].split('_');
-                
-               console.log(item[1]);
-            }
+                let id = cook[0].split('_');
+                data_array.push(id[1]);
+               
+            };
         });
+        $.ajax({
+                    type:'POST',
+                    url: 'pages/buy_ajax.php',
+                    data: {'jsonData': JSON.stringify (data_array), 'user_id':id },
+                    success: function(data){
+                        console.log(data);
+                        if(data){
+                            removeCookies();
+                        }
+                    }
+                });
     });
+
+    $('.item_head').on('click', ()=>{
+        let item_id = $(event.target).data('item_id');
+        $('.modal').removeClass('hide');
+        $('.modal').addClass('show');
+        //$('.modal').text('item_id ' + item_id);
+        $.ajax({
+            type:'POST',
+            url: 'pages/modal_ajax.php',
+            data: {'item_id': item_id },
+            success: function(data){
+                console.log(data);
+                if(data){
+                    $('.modal').html(data);
+                }
+            } 
+        });
+        
+    });
+
 });

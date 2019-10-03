@@ -10,7 +10,6 @@
 <div class="row">
 <div class="col-md-6"><h2>Catalog</h2>
 </div>
-    
     <div class="col-md-6 clerfix form-inline">
     <select name="category_id" class="pull-right clearfix form-control" id="sel_category">
         <?while($row = $pr->fetch()):?>
@@ -27,7 +26,7 @@
                 <? if($row = $ps->fetch()):?>
                     <div class="col-md-3">
                         <div class="panel panel-success">
-                            <div class="panel-heading"><?=$row['item_name']?></div>
+                            <div class="panel-heading"><span data-item_id="<?=$row['id']?>" style="cursor:pointer" class="item_head"><?=$row['item_name']?></span></div>
                             <div class="panel-body" style="height:200px">
                                 <img src="<?=$row['image_path']?>" alt="picture" class="" style="max-width:100%;max-height:100%">
                             </div>
@@ -43,4 +42,7 @@
             <?endfor;?>
         </div>
     <?endfor;?>
+</div>
+
+<div class="modal hide">
 </div>
