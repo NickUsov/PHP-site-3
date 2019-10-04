@@ -44,5 +44,3 @@
     <?endfor;?>
 </div>
 
-<div class="modal hide">
-</div>
